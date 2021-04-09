@@ -21,6 +21,7 @@ def runquery():
 
 
 def main():
+    global DATABASE
     import argparse
 
     parser = argparse.ArgumentParser()
