@@ -1,0 +1,12 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "squimple"
+author = "Zach Gulde"
+author-email = "zachgulde@gmail.com"
+classifiers = [ "License :: OSI Approved :: MIT License",]
+
+[tool.flit.scripts]
+squimple = "squimple.server:main"
