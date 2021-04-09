@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+table tr {
+    @apply border-b;
+}
+
+table td {
+    @apply border-l;
+}
+
+table td, table th {
+    @apply px-3 py-1;
+}

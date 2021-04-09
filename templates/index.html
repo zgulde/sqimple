@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body class="max-w-screen-xl mx-auto py-5 grid grid-cols-2 gap-x-5">
+        <div>
+            <h2 class="text-xl">Enter Query</h2>
+
+
+            <div id="query" class="border border-blue-500" style="height: 60vh;"></div>
+            <!-- <textarea id="query" rows="10" class="border w-full font-mono"> -->
+            <!-- </textarea> -->
+            <button class="mb-5 mt-2 rounded bg-blue-600 text-white hover:bg-blue-700 px-5 py-2" id="submit">Run</button>
+
+        </div>
+
+        <div>
+            <h2 class="text-xl">Results</h2>
+            <p id="error" class="hidden text-red-500"></p>
+            <table class="table-auto border" id="output"></table>
+        </div>
+
+        <script src="ace.js"></script>
+        <script>
+
+            const handleResponse = ({result, error}) => {
+                if (error) {
+                    errorOutput.classList.remove('hidden')
+                    errorOutput.innerText = error
+                } else {
+                    errorOutput.classList.add('hidden')
+                }
+                outputTable.innerHTML = result
+            }
+            const queryTextarea = document.querySelector('#query')
+            const submitButton = document.querySelector('#submit')
+            const outputTable = document.querySelector('#output')
+            const errorOutput = document.querySelector('#error')
+            let response
+
+            submitButton.addEventListener('click', e => {
+                editor.selectAll()
+                const body = editor.getSelectedText().trim()
+                editor.clearSelection()
+                const options = { method: 'POST', body }
+                fetch('/query', options)
+                    .then(response => response.json())
+                    .then(handleResponse)
+            })
+
+const editor = ace.edit('query')
+editor.session.setMode('ace/mode/sql')
+editor.insert(`WITH RECURSIVE t(id, x, y) AS (
+    SELECT 1, random() % 100, random() % 100
+    UNION
+    SELECT id + 1, random() % 100, random() % 100
+    FROM t WHERE id < 10
+)
+SELECT * FROM t`)
+
+
+        </script>
+    </body>
+</html>
