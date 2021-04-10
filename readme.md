@@ -7,6 +7,10 @@ fully-featured SQL GUI client.
 
 ## Usage
 
+```
+python -m pip install sqimple
+```
+
 One of:
 
 - sqlite
@@ -28,6 +32,13 @@ One of:
     ```
 
 and then visit http://localhost:5000 in your browser.
+
+See the help or subcommand help for more options:
+
+```
+sqimple --help
+sqimple mysql --help
+```
 
 ## Notes
 
