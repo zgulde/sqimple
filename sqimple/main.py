@@ -10,7 +10,7 @@ from sqimple.cli import get_args
 def main():
     args = get_args()
 
-    if args.v >= 2:
+    if args.v > 1:
         level = logging.DEBUG
     elif args.v > 0:
         level = logging.INFO
@@ -23,6 +23,8 @@ def main():
         format="[sqimple %(asctime)s %(levelname)s]%(message)s",
     )
 
+    logging.debug('args:')
+    logging.debug(args)
     app = make_app(args)
 
     print()

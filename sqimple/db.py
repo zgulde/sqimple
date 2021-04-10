@@ -2,8 +2,15 @@ import logging
 from subprocess import run
 
 def run_mysql_query(query, args):
-    # TODO: database is optional here
-    cmd = ['mysql', '--html', args.database]
+    cmd = ['mysql', '--html']
+    if args.username:
+        cmd.extend(['-u', args.username])
+    if args.password:
+        cmd.append('--password={}'.format(args.password))
+    if args.host:
+        cmd.extend(['--host', args.host])
+    if args.database:
+        cmd.append(args.database)
     logging.debug(cmd)
     result = run(cmd, capture_output=True, input=query.encode())
     return result.stdout.decode(), result.stderr.decode()

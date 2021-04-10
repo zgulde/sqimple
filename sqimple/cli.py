@@ -31,7 +31,10 @@ def get_args():
     sqlite_parser.set_defaults(run_query_func=db.run_sqlite_query)
 
     mysql_parser = subparsers.add_parser("mysql")
-    mysql_parser.add_argument('database') # TODO: actually optional
+    mysql_parser.add_argument('database', nargs='?', help='Database to connect to')
+    mysql_parser.add_argument('-u', '--username')
+    mysql_parser.add_argument('-p', '--password')
+    mysql_parser.add_argument('--host')
     mysql_parser.set_defaults(run_query_func=db.run_mysql_query)
 
     pg_parser = subparsers.add_parser("pg", aliases=["postgres", "postgresql"])
