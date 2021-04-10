@@ -11,4 +11,4 @@ requires = [ "Flask==1.1.2" ]
 description-file = "readme.md"
 
 [tool.flit.scripts]
-sqimple = "sqimple.server:main"
+sqimple = "sqimple.main:main"

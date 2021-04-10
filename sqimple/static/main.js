@@ -16,15 +16,17 @@ const handleResponse = ({result, error}) => {
   }
 }
 
-const sendQuery = e => {
+const sendQuery = async e => {
   editor.selectAll()
   const body = editor.getSelectedText().trim()
   editor.clearSelection()
   const options = { method: 'POST', body }
-  fetch('/query', options)
-    .then(response => response.json())
-    .then(handleResponse)
-    .catch(e => showError(`${e.name} ${e.message}`))
+  const response = await fetch('/query', options)
+  if (! response.ok) {
+    showError(response.statusText)
+  }
+  data = await response.json()
+  handleResponse(data)
 }
 
 const submitButton = document.querySelector('#submit')
