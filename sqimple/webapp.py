@@ -15,9 +15,14 @@ def make_app(args):
     def runquery():
         query = flask.request.get_data(as_text=True)
         logging.info(f'Running Query:\n{query}')
-        result = args.run_query_func(query, args.database)
-        return flask.jsonify(
-            dict(result=result.stdout.decode(), error=result.stderr.decode())
-        )
+        out, err = args.run_query_func(query, args)
+        return flask.jsonify(dict(result=out, error=err))
+
+    @app.route("/save/<filename>", methods=["POST"])
+    def savefile(filename):
+        query = flask.request.get_data(as_text=True)
+        with open(filename, 'w+') as f:
+            f.write(query)
+        return f'{filename} saved!'
 
     return app

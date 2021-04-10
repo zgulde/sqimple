@@ -6,22 +6,26 @@
         <link rel="stylesheet" href="/style.css">
     </head>
     <body class="max-w-screen-xl mx-auto py-5 grid grid-cols-2 gap-x-5">
-        <div>
+
+        <section>
             <h2 class="text-xl">Enter Query</h2>
-
-
             <div id="editor" style="height: 60vh;"></div>
-            <!-- </textarea> -->
-            <button class="mb-5 mt-2 rounded bg-blue-600 text-white hover:bg-blue-700 px-5 py-2" id="submit">Run</button>
+            <label class="block mt-3" for="limit">
+                Add <code>LIMIT 1000</code>
+                <input id="limit" type="checkbox" checked />
+            </label>
+            <div class="flex mb-5 mt-2">
+                <button class="rounded bg-blue-600 text-white hover:bg-blue-700 px-5 py-2" id="submit">Run</button>
+                <button class="ml-5 rounded bg-green-600 text-white hover:bg-green-700 px-5 py-2" id="save">Save</button>
+            </div>
             <p>(Or press command + enter)</p>
+        </section>
 
-        </div>
-
-        <div>
+        <section>
             <h2 class="text-xl">Results</h2>
             <p id="error" class="hidden text-red-500"></p>
-            <table class="table-auto border" id="output"></table>
-        </div>
+            <div id="output"></div>
+        </section>
 
         <script src="ace.js"></script>
         <script src="main.js"></script>

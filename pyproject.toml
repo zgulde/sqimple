@@ -1,13 +1,13 @@
 [build-system]
-requires = ["flit_core >=2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ['flit_core >=2,<4']
+build-backend = 'flit_core.buildapi'
 
 [tool.flit.metadata]
-module = "sqimple"
-author = "Zach Gulde"
-author-email = "zachgulde@gmail.com"
-classifiers = [ "License :: OSI Approved :: MIT License",]
-requires = [ "Flask==1.1.2" ]
+module = 'sqimple'
+author = 'Zach Gulde'
+author-email = 'zachgulde@gmail.com'
+classifiers = [ 'License :: OSI Approved :: MIT License',]
+requires = [ 'Flask==1.1', 'waitress==2.0' ]
 description-file = "readme.md"
 
 [tool.flit.scripts]

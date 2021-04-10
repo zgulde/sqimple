@@ -1,5 +1,5 @@
 """
-Simple SQLite Web Interface
+Simple SQL Web Interface
 """
 
-__version__ = "0.0.5"
+__version__ = "0.0.6"

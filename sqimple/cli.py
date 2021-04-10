@@ -31,11 +31,11 @@ def get_args():
     sqlite_parser.set_defaults(run_query_func=db.run_sqlite_query)
 
     mysql_parser = subparsers.add_parser("mysql")
-    mysql_parser.add_argument('database')
+    mysql_parser.add_argument('database') # TODO: actually optional
     mysql_parser.set_defaults(run_query_func=db.run_mysql_query)
 
     pg_parser = subparsers.add_parser("pg", aliases=["postgres", "postgresql"])
     pg_parser.add_argument('database')
-    pg_parser.set_defaults(run_query_func=db.run_mysql_query)
+    pg_parser.set_defaults(run_query_func=db.run_postgres_query)
 
     return parser.parse_args()

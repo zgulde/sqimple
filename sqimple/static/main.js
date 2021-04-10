@@ -16,10 +16,15 @@ const handleResponse = ({result, error}) => {
   }
 }
 
+
 const sendQuery = async e => {
   editor.selectAll()
-  const body = editor.getSelectedText().trim()
+  let body = editor.getSelectedText().trim()
   editor.clearSelection()
+  if (limitCheckbox.checked) {
+    body = body.replace(/;$/, '')
+    body += '\nLIMIT 1000'
+  }
   const options = { method: 'POST', body }
   const response = await fetch('/query', options)
   if (! response.ok) {
@@ -29,11 +34,31 @@ const sendQuery = async e => {
   handleResponse(data)
 }
 
+const saveQuery = async () => {
+  const filename = prompt('Filename?')
+  if (! filename) {
+    return
+  }
+
+  editor.selectAll()
+  let body = editor.getSelectedText().trim()
+  editor.clearSelection()
+
+  const options = {method: 'post', body }
+
+  const response = await fetch('/save/' + filename, options)
+  const text = await response.text()
+  alert(text)
+}
+
 const submitButton = document.querySelector('#submit')
+const saveButton = document.querySelector('#save')
 const outputTable = document.querySelector('#output')
 const errorOutput = document.querySelector('#error')
+const limitCheckbox = document.querySelector('#limit')
 
 submitButton.addEventListener('click', sendQuery)
+saveButton.addEventListener('click', saveQuery)
 
 const editor = ace.edit('editor')
 editor.session.setMode('ace/mode/sql')
