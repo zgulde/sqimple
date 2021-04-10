@@ -30,15 +30,23 @@ def get_args():
     )
     sqlite_parser.set_defaults(run_query_func=db.run_sqlite_query)
 
-    mysql_parser = subparsers.add_parser("mysql")
+    mysql_parser = subparsers.add_parser("mysql", conflict_handler='resolve')
     mysql_parser.add_argument('database', nargs='?', help='Database to connect to')
     mysql_parser.add_argument('-u', '--username')
     mysql_parser.add_argument('-p', '--password')
-    mysql_parser.add_argument('--host')
+    mysql_parser.add_argument('-h', '--host')
     mysql_parser.set_defaults(run_query_func=db.run_mysql_query)
 
-    pg_parser = subparsers.add_parser("pg", aliases=["postgres", "postgresql"])
-    pg_parser.add_argument('database')
+    #  -h, --host=HOSTNAME      database server host or socket directory (default: "local socket")
+    #  -p, --port=PORT          database server port (default: "5432")
+    #  -U, --username=USERNAME  database user name (default: "zach")
+    #  -w, --no-password        never prompt for password
+    #  -W, --password           force password prompt (should happen automatically)
+
+    pg_parser = subparsers.add_parser("pg", aliases=["postgres", "postgresql"], conflict_handler='resolve')
+    pg_parser.add_argument('-d', '--database')
+    pg_parser.add_argument('-U', '--username')
+    pg_parser.add_argument('-h', '--host')
     pg_parser.set_defaults(run_query_func=db.run_postgres_query)
 
     return parser.parse_args()

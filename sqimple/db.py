@@ -23,6 +23,10 @@ def run_postgres_query(query, args):
 
 def run_sqlite_query(query, args):
     cmd = ["sqlite3", "-header", "-html", args.database]
+    if args.username:
+        cmd.extend(['-U', args.username])
+    if args.host:
+        cmd.extend(['-h', args.host])
     logging.debug(cmd)
     result = run(cmd, capture_output=True, input=query.encode())
     # while the other dbs wrap their html output in a <table> element, sqlite
