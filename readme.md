@@ -46,3 +46,4 @@ sqimple mysql --help
 - for postgres passwords, use a `~/.pgpass` file
 - when saving the query to a file, if the specified filename already exists it
   will be overridden
+- relies on `sqlite3`, `mysql`, or `psql` commands being installed
