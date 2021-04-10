@@ -16,22 +16,27 @@ const handleResponse = ({result, error}) => {
   }
 }
 
-
 const sendQuery = async e => {
   editor.selectAll()
   let body = editor.getSelectedText().trim()
   editor.clearSelection()
+
   if (limitCheckbox.checked) {
     body = body.replace(/;$/, '')
     body += '\nLIMIT 1000'
   }
+
   const options = { method: 'POST', body }
-  const response = await fetch('/query', options)
-  if (! response.ok) {
-    showError(response.statusText)
+  try {
+    const response = await fetch('/query', options)
+    if (! response.ok) {
+      showError(response.statusText)
+    }
+    data = await response.json()
+    handleResponse(data)
+  } catch (error) {
+    showError(error)
   }
-  data = await response.json()
-  handleResponse(data)
 }
 
 const saveQuery = async () => {
@@ -46,9 +51,13 @@ const saveQuery = async () => {
 
   const options = {method: 'post', body }
 
-  const response = await fetch('/save/' + filename, options)
-  const text = await response.text()
-  alert(text)
+  try {
+    const response = await fetch('/save/' + filename, options)
+    const text = await response.text()
+    alert(text)
+  } catch (error) {
+    showError(error)
+  }
 }
 
 const submitButton = document.querySelector('#submit')
