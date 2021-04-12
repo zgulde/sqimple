@@ -71,13 +71,7 @@ saveButton.addEventListener('click', saveQuery)
 
 const editor = ace.edit('editor')
 editor.session.setMode('ace/mode/sql')
-editor.insert(`WITH RECURSIVE t(id, x, y) AS (
-    SELECT 1, random() % 100, random() % 100
-    UNION
-    SELECT id + 1, random() % 100, random() % 100
-    FROM t WHERE id < 10
-)
-SELECT * FROM t`)
+editor.insert(`SELECT 1 AS one`)
 
 editor.commands.addCommand({
   name: 'sendQuery',
