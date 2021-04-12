@@ -5,6 +5,8 @@ Simple SQL Web Interface for sqlite, mysql, and postgres databases.
 Intended to be a step between the DBMS' interactive command line interface and a
 fully-featured SQL GUI client.
 
+![](demo.gif)
+
 ## Usage
 
 ```
