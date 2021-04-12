@@ -704,6 +704,10 @@ video {
   }
 }
 
+table {
+  position: relative;
+}
+
 table tr {
   border-bottom-width: 1px;
 }
@@ -717,6 +721,12 @@ table td, table th {
   padding-bottom: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
+}
+
+table th {
+  background: white;
+  position: sticky;
+  top: 0;
 }
 
 @media (min-width: 640px) {
